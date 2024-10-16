@@ -1,5 +1,4 @@
-document.querySelector('#signForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+document.querySelector('#submit').addEventListener('click', ()=>{
 
     const email = document.querySelector(`#email`)
     const password = document.querySelector(`#password`)
@@ -23,14 +22,10 @@ document.querySelector('#signForm').addEventListener('submit', (e) => {
             return resp.json();
         })
         .then(data => {
-            if (data.error) {
-                alert("오류 발생" + data.error)
-            } else {
-                alert("등록 성공")
-            }
+            alert("등록 성공")
+            location.href="/"
         })
         .catch((error) => {
-            console.error("fetch 에러" + error)
+            alert("오류 발생 : " + error.message);
         });
-    location.href="/login"
 })

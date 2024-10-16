@@ -1,4 +1,4 @@
-document.querySelector('#loginForm').addEventListener('submit', (e) => {
+document.querySelector('#submit').addEventListener('click', (e) => {
     e.preventDefault();
 
     const email = document.querySelector(`#email`)

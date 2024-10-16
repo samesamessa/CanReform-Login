@@ -30,5 +30,4 @@ public class LoginEntity {
     @CreatedDate
     private LocalDateTime createdAt;
     private String is_active;
-
 }
