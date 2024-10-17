@@ -10,7 +10,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,18 +18,20 @@ import org.springframework.stereotype.Service;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
-//    public final PasswordEncoder passwordEncoder;
-    public final LoginService loginService;
     public final LoginRepository loginRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginEntity entity = loginRepository.findByEmail(username);
-        LoginDTO dto = LoginDTO.toDTO(entity);
-        if(dto == null){
-            throw new UsernameNotFoundException(username);
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.info("Response Email : {}", email);
+        LoginEntity entity = loginRepository.findByEmail(email);
+        log.info("Response Entity : {}", entity);
+        if(entity == null){
+            throw new UsernameNotFoundException(email);
         }
+
+        LoginDTO dto = LoginDTO.toDTO(entity);
         log.info(dto.toString());
+
         UserDetails userDetails = UserDTO.builder()
                 .username(dto.getEmail())
                 .password(dto.getPassword())

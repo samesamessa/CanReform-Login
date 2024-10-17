@@ -4,7 +4,7 @@ document.querySelector('#submit').addEventListener('click', ()=>{
     const password = document.querySelector(`#password`)
     const username = document.querySelector(`#username`)
 
-    fetch(`/api/signup`, {
+    fetch(`/signup`, {
         method : 'POST',
         headers : {
             'Content-Type' : 'application/json'

@@ -11,6 +11,7 @@ import java.util.Collection;
 @ToString
 
 public class UserDTO extends User {
+
     public UserDTO(String username, String password, Collection<? extends GrantedAuthority> authorities){
         super(username, password, authorities);
     }

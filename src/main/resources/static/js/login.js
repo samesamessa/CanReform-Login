@@ -3,29 +3,24 @@ document.querySelector('#submit').addEventListener('click', (e) => {
 
     const email = document.querySelector(`#email`)
     const password = document.querySelector(`#password`)
-
-    fetch(`/api/login`, {
+    const formData = new URLSearchParams();
+    formData.append('email', email.value);
+    formData.append('password', password.value);
+    fetch(`/login`, {
         method : 'POST',
         headers : {
-            'Content-Type' : 'application/json'
+            'Content-Type' : 'application/x-www-form-urlencoded'
         },
-        body : JSON.stringify({
-            email : email.value,
-            password : password.value
-        })
+        credentials: 'include',
+        body : formData.toString()
     })
         .then((resp) => {
+            console.log(resp)
             if(!resp.ok && resp.status !== 400){
                 console.log(resp.status)
                 throw new Error("로그인 실패" + resp.status);
-            }
-            return resp.json();
-        })
-        .then(data => {
-            if (data.error) {
-                alert("data 오류 발생" + data.error)
-            } else {
-                alert("로그인 성공")
+            } else{
+                alert("로그인 성공!")
                 location.href="/"
             }
         })
