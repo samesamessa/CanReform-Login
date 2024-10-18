@@ -1,10 +1,10 @@
 document.querySelector('#submit').addEventListener('click', (e) => {
     e.preventDefault();
 
-    const email = document.querySelector(`#email`)
+    const username = document.querySelector(`#username`)
     const password = document.querySelector(`#password`)
     const formData = new URLSearchParams();
-    formData.append('email', email.value);
+    formData.append('username', username.value);
     formData.append('password', password.value);
     fetch(`/login`, {
         method : 'POST',
@@ -29,4 +29,13 @@ document.querySelector('#submit').addEventListener('click', (e) => {
             alert("로그인 오류 발생: " + error.message); // 사용자에게 오류 메시지 표시
         });
 
+})
+
+
+document.querySelector('#back').addEventListener('click', ()=>{
+    if(history.length>1){
+        history.back()
+    } else{
+        location.href="/"
+    }
 })

@@ -29,3 +29,11 @@ document.querySelector('#submit').addEventListener('click', ()=>{
             alert("오류 발생 : " + error.message);
         });
 })
+
+document.querySelector('#back').addEventListener('click', ()=>{
+    if(history.length>1){
+        history.back()
+    } else{
+        location.href="/"
+    }
+})
